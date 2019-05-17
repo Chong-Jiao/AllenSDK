@@ -285,7 +285,10 @@ class StaticGratings(StimulusAnalysis):
             corr_matrix = np.empty((len(subset),len(subset)))
             for i in range(len(subset)):
                 for j in range(len(subset)):
-                    r,p = st.pearsonr(subset[str(nc)].iloc[i][28:42], subset[str(nc)].iloc[j][28:42])
+                    pstart = self.interlength
+                    pend = self.interlength+self.sweeplength+self.extralength
+                    r,p = st.pearsonr(subset[str(nc)].iloc[i][pstart:pend], subset[str(nc)].iloc[j][pstart:pend])
+                    #r,p = st.pearsonr(subset[str(nc)].iloc[i][28:42], subset[str(nc)].iloc[j][28:42])
                     corr_matrix[i,j] = r
             mask = np.ones((len(subset), len(subset)))
             for i in range(len(subset)):
